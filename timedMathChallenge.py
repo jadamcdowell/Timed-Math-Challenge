@@ -7,6 +7,9 @@ OPERATORS = ["+", "-", "*"]
 MIN_OPERAND = 3
 MAX_OPERAND = 12
 
+# define total problems
+TOTAL_PROBLEMS = 5
+
 def generate_problem():
     # generate random operands within the specified range
     left = random.randint(MIN_OPERAND, MAX_OPERAND)
@@ -18,5 +21,19 @@ def generate_problem():
     # construct the expression as a string
     expression = str(left) + "" + operator + str(right)
 
-    # return the expression as a string
-    return expression
+    answer = eval(expression)
+
+    # return the expression and answer as a string
+    return expression, answer
+
+# loop to generate and solve random problems
+for i in range(TOTAL_PROBLEMS):
+    # generate math problem
+    expression, answer = generate_problem()
+    # loop until correct answer is provided
+    while True:
+        # prompt user with questions
+        guess = input("Problem #" + str(i + 1) + ": " + expression + " = ")
+        # check if the guess matches answer
+        if guess == str(answer):
+            break
