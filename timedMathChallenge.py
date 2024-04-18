@@ -1,4 +1,6 @@
 import random
+import time
+
 
 # define the list of operators
 OPERATORS = ["+", "-", "*"]
@@ -8,7 +10,8 @@ MIN_OPERAND = 3
 MAX_OPERAND = 12
 
 # define total problems
-TOTAL_PROBLEMS = 5
+TOTAL_PROBLEMS = 10
+
 
 def generate_problem():
     # generate random operands within the specified range
@@ -19,12 +22,21 @@ def generate_problem():
     operator = random.choice(OPERATORS)
 
     # construct the expression as a string
-    expression = str(left) + "" + operator + str(right)
+    exp = str(left) + "" + operator + str(right)
 
-    answer = eval(expression)
+    ans = eval(exp)
 
     # return the expression and answer as a string
-    return expression, answer
+    return exp, ans
+
+
+wrong = 0
+correct = 0
+
+input("Press enter to start challenge")
+print("----------------------------")
+
+start_time = time.time()
 
 # loop to generate and solve random problems
 for i in range(TOTAL_PROBLEMS):
@@ -36,4 +48,18 @@ for i in range(TOTAL_PROBLEMS):
         guess = input("Problem #" + str(i + 1) + ": " + expression + " = ")
         # check if the guess matches answer
         if guess == str(answer):
+            correct += 1
             break
+        else:
+            wrong += 1
+            break
+# get the current time to calculate the end time of the program
+end_time = time.time()
+
+# calculate the total time by subtracting the start time from end time and rounding the result 2 places
+total_time = round(end_time - start_time, 2)
+
+# display the results
+print("\n---------Results----------")
+print("Correct: " + str(correct) + "\tIncorrect: " + str(wrong))
+print("Nice work! You finished in " + str(total_time) + " seconds.")
